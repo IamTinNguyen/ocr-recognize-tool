@@ -1,0 +1,19 @@
+.card {
+    width: 80%;
+    height: 220px;
+    border-radius: 10px;
+    padding: 20px 25px;
+    margin: 20px 15px;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    background-position: center;
+    align-items: center;
+    transition: linear 0.3s;
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

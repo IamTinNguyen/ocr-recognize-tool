@@ -1,0 +1,50 @@
+.card-detail-row {
+    align-items: flex-start;
+}
+
+.card-detail-row .col-12 h2 {
+    font-size: 50px;
+    color: #2a343a;
+    font-family: 'Bebas Neue', cursive;
+    
+}
+
+.image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 400px;
+    border: 1.5px dashed grey;
+    border-radius: 9px;
+}
+
+.image img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.image div {
+    font-size: 18px;
+    text-align: center;
+}
+
+.upload-icon {
+    font-size: 80px;
+    color: #385f77;
+}
+
+.upload-btn {
+    width: 100%;
+    height: 50px;
+    background-color: #385f77;
+    color: azure;
+    border-radius: 20px;
+    font-size: 17px;
+    text-transform: uppercase;
+}
+
+.upload-btn:hover {
+    color: #385f77;
+    background-color: transparent;
+    border: 1px solid #385f77;
+}
