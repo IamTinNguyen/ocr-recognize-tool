@@ -15,6 +15,7 @@ function Content() {
 
             <Service
                 name="PLANT IDENTIFICATION" id="plant" value=""
+                hr="1.5px"
             />
 
             <div className='mt-3'></div>
