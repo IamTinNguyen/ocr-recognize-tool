@@ -116,15 +116,15 @@ function Service(props) {
                     </div>
                     <div style={resultClassName}>
                         <p style={{fontWeight:'bold', textTransform:'uppercase', textDecoration:'underline'}}>Result </p>
-                        <p style={{fontWeight:'bold', textTransform:'uppercase', textAlign: 'justify'}}>{plantName ? 'plant Name:' : ''}</p>
-                        <p style={{ textAlign: 'justify'}}>{text || plantName || error}</p>
+                        <p style={{fontWeight:'bold', textTransform:'uppercase', textAlign: 'left'}}>{plantName ? 'plant Name:' : ''}</p>
+                        <p style={{ textAlign: 'left'}}>{text || plantName || error}</p>
                         <div className="mb-2" style={{height:props.hr, backgroundColor:'#e5e5e5'}}></div>
 
-                        <p style={{fontWeight:'bold', textTransform:'uppercase', textAlign: 'justify'}}>{plantCommonName ? 'plant Common name:' : ''}</p>
+                        <p style={{fontWeight:'bold', textTransform:'uppercase', textAlign: 'left'}}>{plantCommonName ? 'plant Common name:' : ''}</p>
                         <p style={{ textAlign: 'justify'}}>{'' || plantCommonName}</p>
                         <div className="mb-2" style={{height:props.hr, backgroundColor:'#e5e5e5'}}></div>
 
-                        <p style={{fontWeight:'bold', textTransform:'uppercase', textAlign: 'justify'}}>{plantDetails ? 'plant details:' : ''}</p>
+                        <p style={{fontWeight:'bold', textTransform:'uppercase', textAlign: 'left'}}>{plantDetails ? 'plant details:' : ''}</p>
                         <p style={{ textAlign: 'justify'}}>{'' || plantDetails}</p>
                     </div>
                 </div>
