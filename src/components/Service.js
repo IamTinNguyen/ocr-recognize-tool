@@ -1,26 +1,66 @@
 import axios from 'axios';
-import { useState, useEffect } from 'react/cjs/react.development';
+import { useState } from 'react/cjs/react.development';
 import './Service.css';
-import {storage} from './firebase'
-import {ref, uploadBytesResumable, getDownloadURL} from '@firebase/storage';
+import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
+import { storage } from "./firebase";
 
 function Service(props) {
     const [text, setText] = useState('');
-    const [link,setLink] = useState('');
+    const [link,setLink] = useState(null);
     const [plantName,setPlantName] = useState('');
     const [plantCommonName,setPlantCommonName] = useState('');
     const [plantDetails,setPlantDetails] = useState('');
     const [error,setError] = useState('');
+    const [display, setDisplay] = useState({display:'none'})
+    const [progress, setProgress] = useState(0);
 
-    function handleChange(e) {
-        setLink(e.target.value);
+    function displayImage() {
+        if (link === null || link === '') {
+            setDisplay({display:"none"})
+        } else {
+            setDisplay({display:"inline"})
+        }
     }
 
+    const formHandler = (e) => {
+        e.preventDefault();
+        const image = e.target.files[0];
+        uploadImages(image);
+        displayImage();
+      };
+    
+    const uploadImages = (image) => {
+        if (!image) return;
+        const sotrageRef = ref(storage, `${image.name}`);
+        const uploadTask = uploadBytesResumable(sotrageRef, image);
+    
+        uploadTask.on(
+          "state_changed",
+          (snapshot) => {
+            const prog = Math.round(
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+            );
+            setProgress(prog);
+          },
+          (error) => console.log(error),
+          () => {
+            getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+              console.log("File available at", downloadURL);
+              setLink(downloadURL);
+            });
+          }
+        );
+    };
     function process() {
         var serviceName = props.name;
         var url;
         console.log(link);
         console.log(serviceName);
+        setText('');
+        setPlantName('');
+        setPlantCommonName('');
+        setPlantDetails('');
+        setError('');
         if (serviceName === 'PLANT IDENTIFICATION'){
             url = 'https://api-flower-project.herokuapp.com/flower?f='+link;
         }
@@ -67,15 +107,16 @@ function Service(props) {
             </div>
             <div className="col-md-12 col-lg-6">
                 <div className="image">
-                    <img style={{ display: 'none' }} src="https://jes.edu.vn/wp-content/uploads/2017/10/h%C3%ACnh-%E1%BA%A3nh.jpg" alt="" />
+                    <img style={{display:"block"}} src={link} alt="" />
                     <div>
-                        <img style={{width: '500px', height: '200px', display:"none"}} alt="" />
+                        <img style={{display:"none"}} src={link || 'https://firebasestorage.googleapis.com/v0/b/midterm-project-7c6a0.appspot.com/o/imageonline-co-placeholder-image.jpg?alt=media&token=4ddad61b-7249-4b35-a9a7-b5e2c739fe93'} alt="Your image" />
                         <i className="m-2 upload-icon fas fa-cloud-upload-alt" />
-                        <br />Input link to process<br />
-                        <input id="default-btn" onChange={handleChange} type="text"/>
+                        <p />Input URL to process<p />
+                        <input id="default-btn" onChange={formHandler} type="file"/>
                     </div>
                 </div>
                 <button className="my-3 upload-btn btn" onClick={process}>Process</button>
+                <h2>Uploading done {progress}%</h2>
             </div>
             <div className="col-md-12 col-lg-6">
                 <div className="image">
