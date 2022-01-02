@@ -13,6 +13,7 @@ function Service(props) {
     const [error,setError] = useState('');
     const [display, setDisplay] = useState({display:'none'})
     const [progress, setProgress] = useState(0);
+    const [className, setClassName] = useState({display:'block'});
 
     function displayImage() {
         if (link === null || link === '') {
@@ -51,11 +52,13 @@ function Service(props) {
           }
         );
     };
+
     function process() {
         var serviceName = props.name;
         var url;
         console.log(link);
-        console.log(serviceName);
+        setClassName({display:'none'});
+        console.log(className);
         setText('');
         setPlantName('');
         setPlantCommonName('');
@@ -108,15 +111,15 @@ function Service(props) {
             <div className="col-md-12 col-lg-6">
                 <div className="image">
                     <img style={{display:"block"}} src={link} alt="" />
-                    <div>
+                    <div style={className}>
+
                         <img style={{display:"none"}} src={link || 'https://firebasestorage.googleapis.com/v0/b/midterm-project-7c6a0.appspot.com/o/imageonline-co-placeholder-image.jpg?alt=media&token=4ddad61b-7249-4b35-a9a7-b5e2c739fe93'} alt="Your image" />
                         <i className="m-2 upload-icon fas fa-cloud-upload-alt" />
                         <p />Input URL to process<p />
                         <input id="default-btn" onChange={formHandler} type="file"/>
                     </div>
                 </div>
-                <button className="my-3 upload-btn btn" onClick={process}>Process</button>
-                <h2>Uploading done {progress}%</h2>
+                <button className="my-3 upload-btn btn" onClick={process}>Click here to upload your file</button>
             </div>
             <div className="col-md-12 col-lg-6">
                 <div className="image">
